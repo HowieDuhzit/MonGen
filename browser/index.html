@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>MonGen Creature Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#07080d;--panel:#11131c;--line:#292d3c;--text:#eef0f7;--muted:#9299ae;--hot:#ff6b2c;--gold:#ffc44d}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 70% 20%,#251208 0,#090a10 42%,#05060a 100%);color:var(--text);font:14px/1.4 Inter,system-ui,sans-serif;height:100vh;overflow:hidden}button,input,select,textarea{font:inherit;color:inherit}button{border:1px solid #3a3f52;border-radius:8px;background:#1b1e2a;padding:9px 13px;cursor:pointer}button:hover{border-color:var(--hot)}button.primary{background:linear-gradient(135deg,#d94416,#ff7a2f);border:0;font-weight:750}.app{display:grid;grid-template-columns:370px 1fr;height:100vh}.controls{background:rgba(12,14,21,.96);border-right:1px solid var(--line);overflow:auto;padding:20px}.brand{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.brand h1{font-size:22px;margin:0;letter-spacing:.02em}.brand small{color:var(--gold);text-transform:uppercase;letter-spacing:.16em}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}.actions .primary{grid-column:span 3}.group{border-top:1px solid var(--line);padding:16px 0}.group h2{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 12px}.field{display:grid;grid-template-columns:125px 1fr auto;align-items:center;gap:8px;margin:9px 0}.field>label{color:#c8ccda}.field input,.field select{width:100%;min-width:0;background:#0a0c12;border:1px solid #303546;border-radius:6px;padding:7px}.field input[type=range]{padding:0;accent-color:var(--hot)}.field output{width:44px;text-align:right;color:var(--gold);font-variant-numeric:tabular-nums}.vec{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.json{width:100%;min-height:210px;resize:vertical;background:#080a10;border:1px solid #303546;border-radius:8px;padding:10px;font:12px/1.45 ui-monospace,monospace}.viewport{position:relative;min-width:0;display:grid;place-items:center}.viewport canvas{width:min(78vw,900px);height:min(78vh,900px);max-width:calc(100vw - 420px);border:1px solid #292d3c;border-radius:18px;background:#020207;box-shadow:0 30px 90px #0009;touch-action:none}.hud{position:absolute;left:26px;top:24px;padding:10px 13px;border:1px solid #34384a;border-radius:9px;background:#090b12cc;color:var(--muted);font:12px ui-monospace,monospace}.hud strong{color:var(--text)}.hint{position:absolute;bottom:25px;color:var(--muted)}.error{color:#ff8270!important}.busy{color:var(--gold)!important}.headless .app{display:block}.headless .controls,.headless .hud,.headless .hint{display:none}.headless .viewport{display:block}.headless canvas{border:0;border-radius:0;max-width:none;width:auto;height:auto}#status{position:fixed;left:8px;top:8px;margin:0;font:14px monospace}@media(max-width:800px){body{height:auto;overflow:auto}.app{display:block;height:auto}.controls{border-right:0}.viewport{height:70vh}.viewport canvas{max-width:94vw;width:94vw;height:94vw}.hint{display:none}}
+body:not(.headless) #status{position:static;margin:0;font:inherit}
+</style></head>
+<body><div class="app">
+<aside class="controls"><div class="brand"><h1>MonGen</h1><small>Creature Lab</small></div>
+<div class="actions"><button id="generate" class="primary">Generate creature</button><button id="mutate">Mutate</button><button id="randomize">Randomize</button><button id="download">Export JSON</button><button id="copy">Copy JSON</button><button id="import">Import JSON</button></div>
+<section class="group"><h2>Identity</h2>
+<div class="field"><label for="name">Name</label><input id="name" type="text" maxlength="64"><span></span></div>
+<div class="field"><label for="seed">Seed</label><input id="seed" type="number" min="0" max="4294967295" step="1"><span></span></div>
+<div class="field"><label for="skeleton">Skeleton</label><select id="skeleton"></select><span></span></div>
+<div class="field"><label for="element">Element</label><select id="element"></select><span></span></div></section>
+<section class="group"><h2>Morphology</h2>
+<div class="field"><label>Body scale</label><div class="vec"><input id="bodyX" type="number" min=".1" max="5" step=".05"><input id="bodyY" type="number" min=".1" max="5" step=".05"><input id="bodyZ" type="number" min=".1" max="5" step=".05"></div><span></span></div>
+<div class="field"><label>Head scale</label><div class="vec"><input id="headX" type="number" min=".1" max="3" step=".05"><input id="headY" type="number" min=".1" max="3" step=".05"><input id="headZ" type="number" min=".1" max="3" step=".05"></div><span></span></div>
+<div class="field"><label for="limbLength">Limb length</label><input id="limbLength" type="range" min=".1" max="3" step=".01"><output></output></div>
+<div class="field"><label for="limbThickness">Limb thickness</label><input id="limbThickness" type="range" min=".02" max="1" step=".01"><output></output></div>
+<div class="field"><label for="tailLength">Tail length</label><input id="tailLength" type="range" min="0" max="5" step=".01"><output></output></div>
+<div class="field"><label for="smoothness">SDF blend</label><input id="smoothness" type="range" min=".01" max=".8" step=".01"><output></output></div>
+<div class="field"><label for="symmetry">Symmetry</label><input id="symmetry" type="checkbox"><span></span></div>
+<div class="field"><label for="resolution">Export volume</label><select id="resolution"><option>32</option><option>64</option><option>96</option><option>128</option><option>192</option><option>256</option></select><span></span></div>
+<div class="field"><label for="previewResolution">Preview volume</label><select id="previewResolution"><option>32</option><option selected>64</option><option>96</option></select><span></span></div></section>
+<section class="group"><h2>Surface</h2>
+<div class="field"><label for="pattern">Pattern</label><select id="pattern"></select><span></span></div>
+<div class="field"><label for="paletteVariant">Palette variant</label><input id="paletteVariant" type="range" min="0" max="255" step="1"><output></output></div>
+<div class="field"><label for="patternScale">Pattern scale</label><input id="patternScale" type="range" min=".1" max="12" step=".1"><output></output></div>
+<div class="field"><label for="roughness">Roughness</label><input id="roughness" type="range" min="0" max="1" step=".01"><output></output></div>
+<div class="field"><label for="metallic">Metallic</label><input id="metallic" type="range" min="0" max="1" step=".01"><output></output></div></section>
+<section class="group"><h2>Animation</h2>
+<div class="field"><label for="animClip">Clip</label><select id="animClip"><option>Idle</option><option>Walk</option><option>Run</option><option>Attack</option><option>Special</option><option>Hurt</option><option>Faint</option></select><span></span></div>
+<div class="field"><label for="animSpeed">Speed</label><input id="animSpeed" type="range" min="0.25" max="4" step="0.25" value="1"><output></output></div>
+<div style="margin-top:8px"><button id="animToggle" style="width:100%">&#9654; Play</button></div></section>
+<section class="group"><h2>Canonical DNA / attachments</h2><textarea id="json" class="json" spellcheck="false"></textarea></section>
+</aside>
+<main class="viewport"><canvas id="preview" aria-label="WebGPU creature preview"></canvas><div id="hud" class="hud"><strong id="status">Initializing WebGPU…</strong><br><span id="metrics">—</span></div><div class="hint">Drag horizontally and vertically to orbit</div></main>
+</div><script type="module" src="/main.ts"></script></body></html>

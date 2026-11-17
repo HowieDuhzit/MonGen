@@ -1,0 +1,9 @@
+{
+  "schemaVersion":"1.0.0","generatorVersion":"0.5.0","seed":270544960,"name":"Voltusk","skeleton":"Biped","element":"Electric",
+  "morphology":{"bodyScale":[1.05,0.82,0.92],"headScale":[0.72,0.68,0.7],"limbLength":1.08,"limbThickness":0.2,"tailLength":0.6,"bilateralSymmetry":true,"sdfSmoothness":0.010,"volumeResolution":96},
+  "surface":{"paletteVariant":11,"pattern":"Bands","patternScale":3.4,"roughness":0.52,"metallic":0.16},
+  "attachments":[
+    {"id":"ear_fins","socket":"Head","transform":{"position":[0,0.18,0.08],"rotation":[0,0,0,1],"scale":[0.48,0.58,0.34]},"mirror":"X","part":{"pool":"Ear","variant":3}},
+    {"id":"shoulder_armor","socket":"Shoulders","transform":{"position":[0,0.02,0],"rotation":[0,0,0,1],"scale":[0.62,0.38,0.5]},"mirror":"X","part":{"pool":"Armor","variant":1}}
+  ]
+}

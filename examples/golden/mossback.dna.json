@@ -1,0 +1,9 @@
+{
+  "schemaVersion":"1.0.0","generatorVersion":"0.5.0","seed":1432778632,"name":"Mossback","skeleton":"Quadruped","element":"Plant",
+  "morphology":{"bodyScale":[1.42,1.0,0.82],"headScale":[0.7,0.64,0.7],"limbLength":0.78,"limbThickness":0.25,"tailLength":1.08,"bilateralSymmetry":true,"sdfSmoothness":0.010,"volumeResolution":96},
+  "surface":{"paletteVariant":29,"pattern":"Mottled","patternScale":5.1,"roughness":0.86,"metallic":0.0},
+  "attachments":[
+    {"id":"leaf_ears","socket":"Head","transform":{"position":[0,0.2,0.12],"rotation":[0,0,0,1],"scale":[0.5,0.62,0.42]},"mirror":"X","part":{"pool":"Leaf","variant":2}},
+    {"id":"back_crystals","socket":"Back","transform":{"position":[0,0.08,-0.08],"rotation":[0,0,0,1],"scale":[0.4,0.58,0.35]},"mirror":"None","part":{"pool":"Crystal","variant":2}}
+  ]
+}

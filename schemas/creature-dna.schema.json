@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mongen.local/schemas/creature-dna.schema.json",
+  "title": "MonGen Creature DNA",
+  "description": "A complete, deterministic input contract for procedural creature generation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "generatorVersion",
+    "seed",
+    "name",
+    "skeleton",
+    "element",
+    "morphology",
+    "surface",
+    "attachments"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "generatorVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Pins generator behavior and asset catalogs; increment when output-affecting algorithms change."
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295,
+      "description": "Unsigned 32-bit seed used by the specified PRNG."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "skeleton": {
+      "enum": ["Biped", "Quadruped", "Serpentine", "Avian", "Floating"]
+    },
+    "element": {
+      "enum": [
+        "Neutral",
+        "Fire",
+        "Water",
+        "Plant",
+        "Earth",
+        "Air",
+        "Electric",
+        "Ice",
+        "Metal",
+        "Light",
+        "Shadow"
+      ]
+    },
+    "morphology": {
+      "$ref": "#/$defs/morphology"
+    },
+    "surface": {
+      "$ref": "#/$defs/surface"
+    },
+    "attachments": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/attachmentNode"
+      }
+    },
+    "artDirection": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional per-creature art direction overrides for timing and palette warmth.",
+      "properties": {
+        "timingMultiplier": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 5.0,
+          "description": "Scales all animation frame durations. <1 faster, >1 slower."
+        },
+        "paletteTemperatureBias": {
+          "type": "number",
+          "minimum": -1.0,
+          "maximum": 1.0,
+          "description": "Shifts key light warmth. Positive = warmer, negative = cooler."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "vec3": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number", "minimum": -1000, "maximum": 1000 },
+        { "type": "number", "minimum": -1000, "maximum": 1000 },
+        { "type": "number", "minimum": -1000, "maximum": 1000 }
+      ],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "positiveVec3": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+        { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+        { "type": "number", "exclusiveMinimum": 0, "maximum": 100 }
+      ],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "quaternion": {
+      "type": "array",
+      "description": "Normalized XYZW quaternion. Unit length is enforced by the TypeScript semantic validator.",
+      "prefixItems": [
+        { "type": "number", "minimum": -1, "maximum": 1 },
+        { "type": "number", "minimum": -1, "maximum": 1 },
+        { "type": "number", "minimum": -1, "maximum": 1 },
+        { "type": "number", "minimum": -1, "maximum": 1 }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "transform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["position", "rotation", "scale"],
+      "properties": {
+        "position": { "$ref": "#/$defs/vec3" },
+        "rotation": { "$ref": "#/$defs/quaternion" },
+        "scale": { "$ref": "#/$defs/positiveVec3" }
+      }
+    },
+    "morphology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bodyScale",
+        "headScale",
+        "limbLength",
+        "limbThickness",
+        "tailLength",
+        "bilateralSymmetry",
+        "sdfSmoothness",
+        "volumeResolution"
+      ],
+      "properties": {
+        "bodyScale": { "$ref": "#/$defs/positiveVec3" },
+        "headScale": { "$ref": "#/$defs/positiveVec3" },
+        "limbLength": { "type": "number", "minimum": 0.1, "maximum": 10 },
+        "limbThickness": { "type": "number", "minimum": 0.02, "maximum": 5 },
+        "tailLength": { "type": "number", "minimum": 0, "maximum": 20 },
+        "bilateralSymmetry": { "type": "boolean" },
+        "sdfSmoothness": { "type": "number", "exclusiveMinimum": 0, "maximum": 2 },
+        "volumeResolution": {
+          "type": "integer",
+          "enum": [32, 64, 96, 128, 192, 256]
+        }
+      }
+    },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["paletteVariant", "pattern", "patternScale", "roughness", "metallic"],
+      "properties": {
+        "paletteVariant": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "pattern": { "enum": ["Solid", "Spots", "Stripes", "Bands", "Mottled"] },
+        "patternScale": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+        "roughness": { "type": "number", "minimum": 0, "maximum": 1 },
+        "metallic": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "attachmentNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "socket", "transform", "mirror", "part"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$"
+        },
+        "socket": {
+          "enum": ["Head", "Shoulders", "Tail", "Back"]
+        },
+        "transform": {
+          "$ref": "#/$defs/transform"
+        },
+        "mirror": {
+          "enum": ["None", "X"]
+        },
+        "part": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pool", "variant"],
+          "properties": {
+            "pool": {
+              "enum": ["None", "Horn", "Ear", "Fin", "Wing", "Spine", "Leaf", "Crystal", "Flame", "Armor"]
+            },
+            "variant": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535,
+              "description": "Stable index into the generator-versioned modular part catalog."
+            }
+          }
+        }
+      }
+    }
+  }
+}

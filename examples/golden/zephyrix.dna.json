@@ -1,0 +1,9 @@
+{
+  "schemaVersion":"1.0.0","generatorVersion":"0.5.0","seed":324478056,"name":"Zephyrix","skeleton":"Avian","element":"Air",
+  "morphology":{"bodyScale":[1.02,0.86,0.96],"headScale":[0.62,0.66,0.7],"limbLength":1.25,"limbThickness":0.15,"tailLength":1.2,"bilateralSymmetry":true,"sdfSmoothness":0.010,"volumeResolution":96},
+  "surface":{"paletteVariant":71,"pattern":"Bands","patternScale":6.0,"roughness":0.44,"metallic":0.02},
+  "attachments":[
+    {"id":"crown","socket":"Head","transform":{"position":[0,0.2,-0.08],"rotation":[0,0,0,1],"scale":[0.26,0.52,0.25]},"mirror":"None","part":{"pool":"Spine","variant":2}},
+    {"id":"great_wings","socket":"Shoulders","transform":{"position":[0,0,0],"rotation":[0,0,0,1],"scale":[0.74,0.58,0.4]},"mirror":"X","part":{"pool":"Wing","variant":3}}
+  ]
+}

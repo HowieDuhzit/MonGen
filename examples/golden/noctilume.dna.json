@@ -1,0 +1,9 @@
+{
+  "schemaVersion":"1.0.0","generatorVersion":"0.5.0","seed":610839776,"name":"Noctilume","skeleton":"Floating","element":"Shadow",
+  "morphology":{"bodyScale":[1.08,0.9,1.02],"headScale":[0.78,0.72,0.76],"limbLength":1.05,"limbThickness":0.18,"tailLength":0.8,"bilateralSymmetry":true,"sdfSmoothness":0.010,"volumeResolution":96},
+  "surface":{"paletteVariant":89,"pattern":"Mottled","patternScale":3.8,"roughness":0.3,"metallic":0.22},
+  "attachments":[
+    {"id":"temple_crystals","socket":"Head","transform":{"position":[0,0.12,0],"rotation":[0,0,0,1],"scale":[0.36,0.52,0.32]},"mirror":"X","part":{"pool":"Crystal","variant":3}},
+    {"id":"back_flame","socket":"Back","transform":{"position":[0,0.05,-0.08],"rotation":[0,0,0,1],"scale":[0.5,0.62,0.5]},"mirror":"None","part":{"pool":"Flame","variant":2}}
+  ]
+}

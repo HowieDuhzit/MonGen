@@ -1,0 +1,9 @@
+{
+  "schemaVersion":"1.0.0","generatorVersion":"0.5.0","seed":2578103244,"name":"Ripplet","skeleton":"Serpentine","element":"Water",
+  "morphology":{"bodyScale":[0.92,1.08,0.72],"headScale":[0.68,0.58,0.78],"limbLength":0.62,"limbThickness":0.16,"tailLength":2.1,"bilateralSymmetry":true,"sdfSmoothness":0.010,"volumeResolution":96},
+  "surface":{"paletteVariant":47,"pattern":"Spots","patternScale":4.8,"roughness":0.38,"metallic":0.08},
+  "attachments":[
+    {"id":"head_fins","socket":"Head","transform":{"position":[0,0.06,-0.02],"rotation":[0,0,0,1],"scale":[0.4,0.54,0.54]},"mirror":"X","part":{"pool":"Fin","variant":1}},
+    {"id":"dorsal_fin","socket":"Back","transform":{"position":[0,0.1,0],"rotation":[0,0,0,1],"scale":[0.3,0.72,0.56]},"mirror":"None","part":{"pool":"Fin","variant":3}}
+  ]
+}

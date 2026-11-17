@@ -1,0 +1,31 @@
+{
+  "name": "mongen",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic procedural creature generation pipeline",
+  "scripts": {
+    "dev": "vite browser --host 127.0.0.1",
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/tests/**/*.test.js",
+    "test:gpu": "node scripts/run-gpu-smoke.mjs",
+    "test:material": "node scripts/generate-mesh.mjs --dna examples/emberling.dna.json --output artifacts/emberling-material-r32.obj --preview artifacts/emberling-material-preview.png --resolution 32",
+    "test:editor": "node scripts/run-editor-smoke.mjs",
+    "test:quality": "npm run build && node scripts/run-quality-gates.mjs",
+    "test:diversity": "npm run build && node scripts/run-diversity-gates.mjs",
+    "test:blender": "python scripts/test-blender-templates.py && node scripts/validate-glb.mjs artifacts/emberling-rigged.glb",
+    "test:sprites": "scripts/run-blender-sprites.sh",
+    "generate": "scripts/mongen.sh",
+    "generate:batch": "scripts/mongen-batch.sh"
+  },
+  "dependencies": {
+    "ajv": "8.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.1.0",
+    "@webgpu/types": "0.1.64",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "playwright-core": "1.62.1",
+    "vite": "8.2.0",
+    "typescript": "5.8.3"
+  }
+}

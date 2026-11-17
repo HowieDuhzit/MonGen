@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatorVersion": "0.5.0",
+  "seed": 3735928559,
+  "name": "Emberling",
+  "skeleton": "Quadruped",
+  "element": "Fire",
+  "morphology": {
+    "bodyScale": [1.25, 0.85, 0.7],
+    "headScale": [0.62, 0.58, 0.6],
+    "limbLength": 0.9,
+    "limbThickness": 0.22,
+    "tailLength": 1.4,
+    "bilateralSymmetry": true,
+    "sdfSmoothness": 0.010,
+    "volumeResolution": 96
+  },
+  "surface": {
+    "paletteVariant": 3,
+    "pattern": "Stripes",
+    "patternScale": 4.5,
+    "roughness": 0.72,
+    "metallic": 0.05
+  },
+  "attachments": [
+    {
+      "id": "head_horns",
+      "socket": "Head",
+      "transform": {
+        "position": [0, 0.23, 0.38],
+        "rotation": [0, 0, 0, 1],
+        "scale": [0.45, 0.45, 0.45]
+      },
+      "mirror": "X",
+      "part": {
+        "pool": "Horn",
+        "variant": 2
+      }
+    },
+    {
+      "id": "tail_flame",
+      "socket": "Tail",
+      "transform": {
+        "position": [0, 0, 1.35],
+        "rotation": [0, 0, 0, 1],
+        "scale": [0.7, 0.7, 0.7]
+      },
+      "mirror": "None",
+      "part": {
+        "pool": "Flame",
+        "variant": 1
+      }
+    }
+  ]
+}
